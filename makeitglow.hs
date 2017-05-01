@@ -13,8 +13,7 @@ import System.Directory
 checkdist ::  FilePath -> IO ()
 checkdist p = do
     e <- doesDirectoryExist p
-    if not e
-    then createDirectory p
+    if not e then createDirectory p
     else putStrLn $ "Using " ++ p ++ " as output path"
 
 main :: IO ()
