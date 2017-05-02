@@ -1,7 +1,7 @@
 -- Filename: makeitglow.hs
 -- Copyright (c) 2008-2017 Clement Trösa <iomonad@riseup.net>
 -- 
--- Last-Updated: 05/01/2017 Monday 23:12:22
+-- Last-Updated: 05/02/2017 Tuesday 08:48:14
 -- Description: Glowing Bear theme generator
 
 {-# LANGUAGE OverloadedStrings #-}
@@ -9,12 +9,16 @@
 import qualified Clay as C
 import System.IO
 import System.Directory
+import Control.Monad
 
-checkdist ::  FilePath -> IO ()
-checkdist p = do
-    e <- doesDirectoryExist p
-    if not e then createDirectory p
-    else putStrLn $ "Using " ++ p ++ " as output path"
+checkdir ::  FilePath -> IO ()
+checkdir p = do
+  e <- doesDirectoryExist p
+  case e of
+    e -> createDirectory p
+    _ -> putStrLn $ "Using "++ p ++" as out folder"
 
 main :: IO ()
-main = checkdist "dist"
+main = do
+  checkdir "dist"
+  putStrLn "Done"
